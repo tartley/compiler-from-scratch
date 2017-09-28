@@ -1,0 +1,6 @@
+def f(a, b)
+    add(100, add(20, add(a, b)))
+end
+
+print(f(1, 2))
+
