@@ -1,12 +1,12 @@
 #!/usr/bin/env python3.6
 '''
+Third stage (Code generation) for a three-stage compiler.
+
 USAGE: ./tokenize.py <input.src | ./parse.py | ./generate.py | node
 
-Compiles a toy language (see input.src) to Javascript,
+Given a parsed node tree as JSON on stdin,
+generates equivalent Javascript on stdout,
 which can be executed by piping into 'node'.
-
-Destroy All Software, s07 0101 A compiler from scratch.
-https://www.destroyallsoftware.com/screencasts/catalog/a-compiler-from-scratch
 '''
 import json
 import sys

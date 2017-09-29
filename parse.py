@@ -1,14 +1,14 @@
 #!/usr/bin/env python3.6
 '''
-USAGE: ./tokenize.py <input.src | ./parse.py [-h]
+Second stage (parse) for a three-stage compiler.
+
+USAGE: ./tokenize.py <input.src | ./parse.py [-h] | ./generate.py | node
 
     -h   Format the JSON output with human-readable indentation
 
-Compiles a toy language (see input.src) to Javascript,
-which can be executed by piping into 'node'.
-
-Destroy All Software, s07 0101 A compiler from scratch.
-https://www.destroyallsoftware.com/screencasts/catalog/a-compiler-from-scratch
+Given a list of tokens as JSON on stdin,
+generates a parsed node tree as JSON on stdout,
+which can be piped into ./generate.py.
 '''
 from collections import namedtuple
 import json
