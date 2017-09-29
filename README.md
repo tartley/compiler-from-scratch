@@ -34,7 +34,7 @@ This repo was first presented to the [Python meetup in Rochester, MN](https://ww
 
 # Toy language
 
-Let's start with the toy language with intend to compile:
+Let's start with the toy language with intend to compile (See [input.src](./input.src)):
 
 ```bash
 $ cat input.src
@@ -57,8 +57,10 @@ runtime.
 
 # Tokenize
 
-This splits the source code above into a sequence of tokens. Each token
-has a type and a value.
+This splits the source code above into a sequence of tokens.
+See [tokenize.py](./tokenize.py).
+
+Each token has a type and a value.
 
 ```bash
 $ cat input.src | ./tokenize.py
@@ -96,7 +98,8 @@ done is straightforward.
 
 # Parse
 
-The output of tokenizing is fed into the parser:
+The output of tokenizing is fed into the parser.
+See [parse.py](./parse.py).
 
 ```bash
 cat input.src | ./tokenize.py | ./parse.py 
@@ -156,7 +159,8 @@ form a tree, representing the origininal input.src.
 
 # Generation
 
-The output of parsing is fed into the generator:
+The output of parsing is fed into the generator.
+See [generate.py](./generate.py).
 
 ```bash
 $ cat input.src | ./tokenize.py | ./parse.py | ./generate.py 
