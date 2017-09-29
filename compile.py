@@ -23,7 +23,7 @@ class Generator:
                 'function {name}({arg_names}) '
                 '{{ return {body} }};'.format(
                     name=node.name,
-                    arg_names=','.join(node.arg_names),
+                    arg_names=', '.join(node.arg_names),
                     body=self.generate(node.body),
                 )
             )
@@ -31,7 +31,7 @@ class Generator:
             return (
                 '{name}({arg_exprs})'.format(
                     name=node.name,
-                    arg_exprs=','.join(map(self.generate, node.arg_exprs))
+                    arg_exprs=', '.join(map(self.generate, node.arg_exprs))
                 )
             )
         elif isinstance(node, VarRefNode):
@@ -47,15 +47,12 @@ def main(code):
     tree = Parser(tokens).parse()
     generator = Generator()
     output = [generator.generate(node) for node in tree]
-    # output a runtime
-    print(dedent('''\
-        function add(x, y) { return x + y };
-        function print(x) { console.log(x) };
-    '''))
-    # output code for our parsed input
-    for line in output:
+    RUNTIME = [
+        'function add(x, y) { return x + y };',
+        'function print(x) { console.log(x) };',
+    ]
+    for line in RUNTIME + output:
         print(line)
-    # if output is piped into node, expect result '123'
 
 if __name__ == '__main__':
     main(sys.stdin.read())
