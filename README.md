@@ -34,7 +34,7 @@ This repo was first presented to the [Python meetup in Rochester, MN](https://ww
 
 # Toy language
 
-Let's start with the toy language with intend to compile (See [input.src](./input.src)):
+Let's start with the toy language we intend to compile (See [input.src](./input.src)):
 
 ```bash
 $ cat input.src
