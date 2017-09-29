@@ -1,6 +1,8 @@
 #!/usr/bin/env python3.6
 '''
-USAGE: ./tokenize.py <input.src
+USAGE: ./tokenize.py <input.src [-h]
+
+    -h   Format the JSON output with human-readable indentation
 
 Compiles a toy language (see input.src) to Javascript,
 which can be executed by piping into 'node'.
@@ -9,6 +11,7 @@ Destroy All Software, s07 0101 A compiler from scratch.
 https://www.destroyallsoftware.com/screencasts/catalog/a-compiler-from-scratch
 '''
 from collections import namedtuple
+import json
 import re
 import sys
 
@@ -42,8 +45,8 @@ def tokenize_one_token(code):
     raise RuntimeError(f"Couldn't match token on {code!r}")
 
 def main(code):
-    for token in tokenize(code):
-        print(token)
+    indent = 4 if '-h' in sys.argv else None
+    print(json.dumps(list(tokenize(code)), indent=indent))
 
 if __name__ == '__main__':
     main(sys.stdin.read())
