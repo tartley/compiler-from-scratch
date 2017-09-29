@@ -6,11 +6,12 @@ Compiles a toy language (see input.src) to Javascript,
 which can be executed by piping into 'node'.
 
 Destroy All Software, s07 0101 A compiler from scratch.
+https://www.destroyallsoftware.com/screencasts/catalog/a-compiler-from-scratch
 '''
 from collections import namedtuple
 import sys
 
-from tokenize import Tokenizer
+from tokenize import tokenize
 
 DefNode = namedtuple('DefNode', 'name arg_names body')
 IntegerNode = namedtuple('IntegerNode', 'value')
@@ -91,7 +92,7 @@ class Parser:
         return VarRefNode(self.consume('identifier').value)
 
 def main(code):
-    tokens = Tokenizer(code).tokenize()
+    tokens = tokenize(code)
     tree = Parser(tokens).parse()
     for node in tree:
         print(node)

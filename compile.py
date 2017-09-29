@@ -6,11 +6,12 @@ Compiles a toy language (see input.src) to Javascript,
 which can be executed by piping into 'node'.
 
 Destroy All Software, s07 0101 A compiler from scratch.
+https://www.destroyallsoftware.com/screencasts/catalog/a-compiler-from-scratch
 '''
 import sys
 from textwrap import dedent
 
-from tokenize import Tokenizer
+from tokenize import tokenize
 from parse import Parser, DefNode, IntegerNode, CallNode, VarRefNode
 
 class Generator:
@@ -43,7 +44,7 @@ class Generator:
                 f'Unexpected node type: {type(node).__name__} {node.value}')
 
 def main(code):
-    tokens = Tokenizer(code).tokenize()
+    tokens = tokenize(code)
     tree = Parser(tokens).parse()
     generator = Generator()
     output = [generator.generate(node) for node in tree]
