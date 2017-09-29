@@ -8,8 +8,11 @@ Following along with Destroy All Software, s07 0101 A compiler from scratch.
 https://www.destroyallsoftware.com/screencasts/catalog/a-compiler-from-scratch
 The DAS content is paywalled, but excellent, I highly recommend paying for it.
 The content of this video, for example goes way beyond the simple content of
-this repo, crammed into 35 minutes. Most of the videos collected there are
-much shorter, so easily digestible, but dive deep on well-chosen topics.
+this repo. At 35 minutes, it's easily digestible. Most of the many videos there
+are significantly shorter than this, so are convenient to watch, but dive deep
+on well-chosen topics.
+
+This repo was first presented to the [Python meetup in Rochester, MN](https://www.meetup.com/PyRochesterMN/).
 
 Being a bear of little brain, I can't just skim over material like this, or
 else I'll forget it in three days. So I followed along, coding along with
@@ -90,6 +93,8 @@ done is straightforward.
 
 # Parse
 
+The output of tokenizing is fed into the parser:
+
 ```bash
 cat input.src | ./tokenize.py | ./parse.py 
 [{"node_type": "def", "name": "f", "arg_names": ["a", "b"],
@@ -128,5 +133,65 @@ etc..
 ```
 
 The parsing has transformed the linear sequence of tokens into a tree of
-*parse nodes*.
+*parse nodes*. Each node has a 'node_type' (in Gary's original, this was
+the class of the node object. To serialize these to JSON, I've added it
+as an explicit field.). Each node type has its own set of additional fields.
+For example, a function definition has:
+
+    node_type: def
+    name: <function name>
+    arg_names: <list of arg names>
+    body: some other node
+
+Whereas an integer literal node has only:
+
+    node_type: int
+    value: <value of integer>
+
+These nodes reference each other (eg. the body of a function definition), to
+form a tree, representing the origininal input.src.
+
+# Generation
+
+The output of parsing is fed into the generator:
+
+```bash
+$ cat input.src | ./tokenize.py | ./parse.py | ./generate.py 
+function add(x, y) { return x + y };
+function print(x) { console.log(x) };
+function f(a, b) { return add(100, add(20, add(a, b))) };
+print(f(1, 2))
+```
+
+This generator produces Javascript, because that's easy to do and easy
+to understand. But it's not a substantially different in principle for it to
+output executable binaries instead.
+
+Only the final two lines in the above output represent our input.src. The
+first two lines are some 'runtime' support that our generator injects into the
+output, to provide an implementation for functions 'add' and 'print'.
+We do this because providing an 'add' function is easy, whereas implementing
+an actual '+' operator in our toy language would be quite verbose, without
+demonstrating anything new.
+
+# Demonstration
+
+Looking back at input.src:
+
+```bash
+$ cat input.src
+def f(a, b)
+    add(100, add(20, add(a, b)))
+end
+
+print(f(1, 2))
+```
+
+We can see the expected output is 123. We can test this, execute the Javascript
+output by piping it to node:
+
+```bash
+$ cat input.src | ./tokenize.py | ./parse.py | ./generate.py | node
+123
+```
 
