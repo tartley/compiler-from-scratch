@@ -16,7 +16,7 @@ def generate(node):
     '''
     Generates Javascript for the given tree.
     '''
-    if node['type_'] == 'def':
+    if node['node_type'] == 'def':
         return (
             'function {name}({arg_names}) '
             '{{ return {body} }};'.format(
@@ -25,16 +25,16 @@ def generate(node):
                 body=generate(node['body']),
             )
         )
-    elif node['type_'] == 'call':
+    elif node['node_type'] == 'call':
         return (
             '{name}({arg_exprs})'.format(
                 name=node['name'],
                 arg_exprs=', '.join(map(generate, node['arg_exprs']))
             )
         )
-    elif node['type_'] == 'var':
+    elif node['node_type'] == 'var':
         return f'{node["name"]}'
-    elif node['type_'] == 'int':
+    elif node['node_type'] == 'int':
         return f'{node["value"]}'
     else:
         raise RuntimeError(

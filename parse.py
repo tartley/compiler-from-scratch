@@ -16,11 +16,6 @@ import sys
 
 from tokenize import Token
 
-DefNode = namedtuple('DefNode', 'name arg_names body')
-IntegerNode = namedtuple('IntegerNode', 'value')
-CallNode = namedtuple('CallNode', 'name arg_exprs')
-VarRefNode = namedtuple('VarRefNode', 'value')
-
 class Parser:
     '''
     Parse sequence of tokens into a grammar tree.
@@ -55,7 +50,7 @@ class Parser:
         body = self.parse_expr()
         self.consume('end')
         return dict(
-            type_='def',
+            node_type='def',
             name=name,
             arg_names=arg_names,
             body=body,
@@ -82,7 +77,7 @@ class Parser:
         name = self.consume('identifier').value
         arg_exprs = list(self.parse_arg_exprs())
         return dict(
-            type_='call',
+            node_type='call',
             name=name,
             arg_exprs=arg_exprs,\
         )
@@ -98,13 +93,13 @@ class Parser:
 
     def parse_integer(self):
         return dict(
-            type_='int',
+            node_type='int',
             value=int(self.consume('integer').value),
         )
 
     def parse_var_ref(self):
         return dict(
-            type_='var',
+            node_type='var',
             name=self.consume('identifier').value,
         )
 
