@@ -4,15 +4,16 @@ Compile a toy language (see input.src) to Javascript.
 USAGE: cat input.src | ./tokenize.py | ./parse.py | ./generate.py | node
 ```
 
-Following along with Destroy All Software, s07 0101 A compiler from scratch.
-https://www.destroyallsoftware.com/screencasts/catalog/a-compiler-from-scratch
-The DAS content is paywalled, but excellent, I highly recommend paying for it.
-The content of this video, for example goes way beyond the simple content of
-this repo. At 35 minutes, it's easily digestible. Most of the many videos there
-are significantly shorter than this, so are convenient to watch, but dive deep
-on well-chosen topics.
+Written using Python3.6, no other dependencis.
 
-This repo was first presented to the [Python meetup in Rochester, MN](https://www.meetup.com/PyRochesterMN/).
+Following along with Destroy All Software, s07-e0101, A compiler from scratch.
+https://www.destroyallsoftware.com/screencasts/catalog/a-compiler-from-scratch
+
+The DAS content is paywalled, but excellent, I highly recommend it. This video,
+for example goes way beyond what I'm about to describe here. The videos are
+very short (usually closer to ten minutes) so are easily digestible, but are
+dense, like pair programming with an expert, you learn a lot of incidentals
+along the way, and they dive deep on well-chosen topics.
 
 Being a bear of little brain, I can't just skim over material like this, or
 else I'll forget it in three days. So I followed along, coding along with
@@ -28,6 +29,8 @@ Gary, but couldn't resist making a few changes along the way:
   allowing the input source to contain a sequence of function definitions
   and/or function calls. This means we no longer need the 'TEST' code injected
   at code generation time.
+
+This repo was first presented to the [Python meetup in Rochester, MN](https://www.meetup.com/PyRochesterMN/).
 
 # Toy language
 
