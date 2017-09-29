@@ -6,9 +6,14 @@ USAGE: cat input.src | ./tokenize.py | ./parse.py | ./generate.py | node
 
 Following along with Destroy All Software, s07 0101 A compiler from scratch.
 https://www.destroyallsoftware.com/screencasts/catalog/a-compiler-from-scratch
-(paywalled.) Being a bear of little brain, I can't just skim over material
-like this, or else I'll forget it in three days. So I followed along, but
-couldn't resist making a few changes along the way:
+The DAS content is paywalled, but excellent, I highly recommend paying for it.
+The content of this video, for example goes way beyond the simple content of
+this repo, crammed into 35 minutes. Most of the videos collected there are
+much shorter, so easily digestible, but dive deep on well-chosen topics.
+
+Being a bear of little brain, I can't just skim over material like this, or
+else I'll forget it in three days. So I followed along, coding along with
+Gary, but couldn't resist making a few changes along the way:
 
 * Translated from Ruby to Python.
 * I split the three phases into stand-alone scripts. This adds the slight
