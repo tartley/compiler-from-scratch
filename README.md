@@ -1,4 +1,4 @@
-Compile a toy language (See [input.src](./input.src) to Javascript.
+Compile a toy language (see [input.src](./input.src)) to Javascript.
 
 ```bash
 USAGE: cat input.src | ./tokenize.py | ./parse.py | ./generate.py | node
